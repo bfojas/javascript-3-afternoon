@@ -30,6 +30,19 @@
 */
 
 //Code Here
+class Employee {
+  constructor (firstName,lastName,email,age){
+    this.first_name = firstName;
+    this.last_name = lastName;
+    this.email = email;
+    this.age = age;
+  }
+  makeWidget (){
+    return `${this.first_name} ${this.last_name} Widget`;
+  }
+}
+
+
 
 
 
@@ -50,7 +63,22 @@
 */
 
 //Code Here
-
+class Manager {
+  constructor(firstName,lastName,email,age){
+    this.first_name = firstName;
+    this.last_name = lastName;
+    this.email = email;
+    this.age = age;
+    this.reports = [];
+  }
+  hire(employee){
+     this.reports.push(employee);
+  }
+  fire(i){
+    this.reports.splice(i,1);
+    return this.reports
+  }
+}
 
 
 ////////// PROBLEM 3 //////////
@@ -76,7 +104,53 @@
 */
 
 //Code Here
+class ProgressiveManager {
+  constructor(firstName,lastName,email,age,reports,title,bonus){
+    this.first_name = firstName;
+    this.last_name = lastName;
+    this.email = email;
+    this.age = age;
+    this.reports = [];
+    this.title = 'Not a manager';
+    this.bonus = 0;
+  }
 
+  hire(employee){
+    this.reports.push(employee);
+    this.titleChange(this.reports);
+    return this.reports;
+  }
+  fire(i){
+    this.reports.splice(i,1);
+    this.bonus += 100;
+    // return this.reports
+  }
+  titleChange(array){
+    // if (array.length == 0){
+    //   this.title = 'Not a manager'}
+    // else if (array.length <=3){
+    //   this.title = 'Barely Manager'}
+    // else if (array.length <= 10){
+    //   this.title = 'Mostly Manager'}
+    // else if (array.length <= 50){
+    //   this.title = 'Manager'}    
+    // else if (array.length <= 100){
+    //   this.title = 'Manager Plus'}else{
+    //   this.title = 'Bestest Manager'}
+    array.length === 0?
+    this.title = 'Not a manager':
+    array.length <=3?
+    this.title = 'Barely Manager':
+    array.length <= 10?
+    this.title = 'Mostly Manager':
+    array.length <= 50?
+    this.title = 'Manager':
+    array.length <= 100?
+    this.title = 'Manager Plus':
+    this.title = 'Bestest Manager'
+
+  }
+}
 
 
 ////////// PROBLEM 4 - Black Diamond //////////
@@ -103,5 +177,25 @@
 */
 
 //Code Here
+class Machine {
+  constructor(){
+    this.widgets_made_count = 0;
+    this.wear_and_tear_count = 0;
+    this.needs_reboot = false;
+  }
+  makeWidgets (num){
+    this.widgets_made_count += num;
+    this.wear_and_tear_count = (this.widgets_made_count/50);
+  }
+  fixMachine (){
+    this.needs_reboot = true;
+    console.log('fix')
+  }
+  reboot (){ return  () => {
+      this.wear_and_tear_count -= 10;
+      this.needs_reboot = false;}
+  }
+  }
+
 
 
